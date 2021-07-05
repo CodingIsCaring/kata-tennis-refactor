@@ -47,9 +47,9 @@ describe('All cases', () => {
       const game = new TennisGame3('player1', 'player2');
 
       // Player 1
-      addPointPlayer(input[0], game.p1N, game);
+      addPointPlayer(input[0], game.namePlayer1, game);
       // Player 2
-      addPointPlayer(input[1], game.p2N, game);
+      addPointPlayer(input[1], game.namePlayer2, game);
 
       allGameCasesRESULT.push(game.getScore());
 
