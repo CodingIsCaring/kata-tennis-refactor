@@ -6,18 +6,24 @@ const TennisGame3 = function (name1, name2) {
   this.namePlayer2 = name2;
 };
 
+function getPlayerScoreAsText(points) {
+  const scoreAsText = ['Love', 'Fifteen', 'Thirty', 'Forty'];
+  return scoreAsText[points];
+}
+
 TennisGame3.prototype.getScore = function () {
-  let s;
+  let scorePlayer1;
+  const isTied = this.scorePlayer1 === this.scorePlayer2;
   if ((this.scorePlayer1 < 4 && this.scorePlayer2 < 4) && (this.scorePlayer1 + this.scorePlayer2 < 6)) {
-    const p = ['Love', 'Fifteen', 'Thirty', 'Forty'];
-    s = p[this.scorePlayer1];
-    return (this.scorePlayer1 === this.scorePlayer2) ? s + '-All' : s + '-' + p[this.scorePlayer2];
+    scorePlayer1 = getPlayerScoreAsText(this.scorePlayer1);
+    const scorePlayer2 = getPlayerScoreAsText(this.scorePlayer2);
+    return isTied ? scorePlayer1 + '-All' : scorePlayer1 + '-' + scorePlayer2;
   } else {
-    if (this.scorePlayer1 === this.scorePlayer2) {
+    if (isTied) {
       return 'Deuce';
     }
-    s = this.scorePlayer1 > this.scorePlayer2 ? this.namePlayer1 : this.namePlayer2;
-    return ((this.scorePlayer1 - this.scorePlayer2) * (this.scorePlayer1 - this.scorePlayer2) === 1) ? 'Advantage ' + s : 'Win for ' + s;
+    let highestScorePlayer = this.scorePlayer1 > this.scorePlayer2 ? this.namePlayer1 : this.namePlayer2;
+    return ((this.scorePlayer1 - this.scorePlayer2) * (this.scorePlayer1 - this.scorePlayer2) === 1) ? 'Advantage ' + highestScorePlayer : 'Win for ' + highestScorePlayer;
   }
 };
 
